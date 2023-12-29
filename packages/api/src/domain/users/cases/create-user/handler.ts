@@ -3,6 +3,7 @@ import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
 import { Domain } from '@/types/domain';
+
 import { receivedFieldsSchema } from './schemas';
 import CreateUserUseCase from './use-case';
 

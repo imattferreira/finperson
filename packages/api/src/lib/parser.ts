@@ -1,6 +1,8 @@
 import { z } from 'zod';
-import Either, { Left, Right } from './either';
+
 import InvalidFormatException from '@/exceptions/invalid-format-exception';
+
+import Either, { Left, Right } from './either';
 
 const custom = {
   json: <O extends Obj, T extends z.ZodTypeDef, I>(

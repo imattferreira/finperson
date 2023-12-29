@@ -1,4 +1,5 @@
 import type { Domain } from '@/types/domain';
+
 import { type UnwrappedLeft, type UnwrappedRight } from './either';
 import { snake } from './object';
 

@@ -1,4 +1,5 @@
 import type { Domain } from '@/types/domain';
+
 import UsersRepository from '../../../authentication/repository/implementations/users-repository';
 import CreateUserHandler from './handler';
 import CreateUserUseCase from './use-case';

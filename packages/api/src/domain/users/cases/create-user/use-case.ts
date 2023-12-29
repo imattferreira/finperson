@@ -1,5 +1,6 @@
-import ConflictException from '../../../../exceptions/conflict-exception';
 import Either, { Left, Right } from '@/lib/either';
+
+import ConflictException from '../../../../exceptions/conflict-exception';
 // TODO boundary-contexts
 import User, { encryptPassword } from '../../../authentication/entities/user';
 // TODO boundary-contexts

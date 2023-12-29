@@ -1,4 +1,5 @@
 import type { Domain } from '@/types/domain';
+
 import TransactionsRepository from '../../repositories/implementations/transactions-repository';
 import CreateTransactionHandler from './handler';
 import CreateTransactionUseCase from './use-case';
