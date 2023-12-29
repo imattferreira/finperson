@@ -23,7 +23,7 @@ export class Left {
   }
 }
 
-export class Right<T extends Record<string, unknown>> {
+export class Right<T extends Obj> {
   constructor(private readonly result: T) {}
 
   unwrap(): UnwrappedRight<T> {
@@ -36,7 +36,7 @@ class Either {
     return obj instanceof Left;
   }
 
-  public static isRight(obj: unknown): obj is Right<Record<string, unknown>> {
+  public static isRight(obj: unknown): obj is Right<Obj> {
     return obj instanceof Right;
   }
 
@@ -44,9 +44,7 @@ class Either {
     return new Left(exception);
   }
 
-  public static toRight<T extends Record<string, unknown>>(
-    result: T
-  ): Right<T> {
+  public static toRight<T extends Obj>(result: T): Right<T> {
     return new Right<T>(result);
   }
 }

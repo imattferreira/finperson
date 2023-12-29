@@ -3,7 +3,7 @@ import Either, { Left, Right } from './either';
 import InvalidFormatException from '../exceptions/invalid-format-exception';
 
 const custom = {
-  json: <O extends Record<string, unknown>, T extends z.ZodTypeDef, I>(
+  json: <O extends Obj, T extends z.ZodTypeDef, I>(
     data: string | null,
     schema: z.ZodType<O, T, I>
   ): Left | Right<O> => {

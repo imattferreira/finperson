@@ -9,7 +9,7 @@ class AuthenticateUseCase {
 
   async execute(
     received: AuthenticateReceivedFields
-  ): Promise<Left | Right<Record<string, unknown>>> {
+  ): Promise<Left | Right<Obj>> {
     const user = await this.usersRepository.findByEmail(
       received.required.email
     );
@@ -30,6 +30,7 @@ class AuthenticateUseCase {
 
     await this.usersRepository.update(user);
 
+    // TODO
     const token = '';
 
     return Either.toRight({
