@@ -1,10 +1,24 @@
 class User {
+  #name: string;
   #email: string;
   #password: string;
 
-  constructor({ email, password }: { email: string; password: string }) {
-    this.#password = password;
+  constructor({
+    name,
+    email,
+    password
+  }: {
+    name: string;
+    email: string;
+    password: string;
+  }) {
+    this.#name = name;
     this.#email = email;
+    this.#password = password;
+  }
+
+  get name(): string {
+    return this.#name;
   }
 
   get email(): string {

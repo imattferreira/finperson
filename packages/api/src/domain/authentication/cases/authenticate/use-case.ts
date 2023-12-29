@@ -1,18 +1,16 @@
 import InvalidFormatException from '../../../../exceptions/invalid-format-exception';
 import Either, { Left, Right } from '../../../../lib/either';
 import { comparePassword, encryptPassword } from '../../entities/user';
-import UsersRepository from '../../repository/interfaces/users-repository';
+import IUsersRepository from '../../repository/interfaces/iusers-repository';
 import type { AuthenticateReceivedFields } from './schemas';
 
 class AuthenticateUseCase {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(private readonly usersRepository: IUsersRepository) {}
 
   async execute(
-    received: AuthenticateReceivedFields
+    fields: AuthenticateReceivedFields
   ): Promise<Left | Right<Obj>> {
-    const user = await this.usersRepository.findByEmail(
-      received.required.email
-    );
+    const user = await this.usersRepository.findByEmail(fields.email);
 
     if (!user) {
       return Either.toLeft(
@@ -20,13 +18,13 @@ class AuthenticateUseCase {
       );
     }
 
-    if (!comparePassword(user.password, received.required.password)) {
+    if (!comparePassword(user.password, fields.password)) {
       return Either.toLeft(
         new InvalidFormatException('invalid [email] or [password]')
       );
     }
 
-    user.password = encryptPassword(received.required.password);
+    user.password = encryptPassword(fields.password);
 
     await this.usersRepository.update(user);
 

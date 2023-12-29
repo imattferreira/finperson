@@ -1,13 +1,13 @@
 import HandlerStatus from '../../../../constants/handler-status';
-import { type Domain } from '../../../../types/domain';
+import Either from '../../../../lib/either';
 import { reject, resolve } from '../../../../lib/handler';
 import parser from '../../../../lib/parser';
-import AuthenticateUseCase from './use-case';
+import { Domain } from '../../../../types/domain';
 import { receivedFieldsSchema } from './schemas';
-import Either from '../../../../lib/either';
+import CreateUserUseCase from './use-case';
 
-class AuthenticateHandler {
-  constructor(private readonly useCase: AuthenticateUseCase) {}
+class CreateUserHandler {
+  constructor(private readonly useCase: CreateUserUseCase) {}
 
   async handleWith(event: Domain.Event): Promise<Domain.Response> {
     const receivedFields = parser.json(event.body, receivedFieldsSchema);
@@ -22,8 +22,8 @@ class AuthenticateHandler {
       return reject(executed.unwrap());
     }
 
-    return resolve(HandlerStatus.OK, executed.unwrap());
+    return resolve(HandlerStatus.CREATED, executed.unwrap());
   }
 }
 
-export default AuthenticateHandler;
+export default CreateUserHandler;

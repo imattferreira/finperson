@@ -23,7 +23,7 @@ export class Left {
   }
 }
 
-export class Right<T extends Obj> {
+export class Right<T extends Nullish<Obj>> {
   constructor(private readonly result: T) {}
 
   unwrap(): UnwrappedRight<T> {
@@ -44,7 +44,7 @@ class Either {
     return new Left(exception);
   }
 
-  public static toRight<T extends Obj>(result: T): Right<T> {
+  public static toRight<T extends Nullish<Obj>>(result: T): Right<T> {
     return new Right<T>(result);
   }
 }

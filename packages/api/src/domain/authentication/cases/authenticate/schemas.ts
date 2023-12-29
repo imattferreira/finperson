@@ -1,11 +1,9 @@
 import { z } from 'zod';
 import parser from '../../../../lib/parser';
 
-export type AuthenticateReceivedFields = {
-  required: z.infer<typeof requiredFieldsSchema>;
-};
+export type AuthenticateReceivedFields = z.infer<typeof receivedFieldsSchema>;
 
-export const requiredFieldsSchema = parser.object({
+export const receivedFieldsSchema = parser.object({
   email: parser.string().email(),
   password: parser.string()
 });
