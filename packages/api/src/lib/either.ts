@@ -8,7 +8,7 @@ export interface UnwrappedLeft {
   timestamp: string;
 }
 
-export type UnwrappedRight = object | null;
+export type UnwrappedRight<T> = T;
 
 export class Left {
   constructor(private readonly exception: CustomException) {}
@@ -23,10 +23,10 @@ export class Left {
   }
 }
 
-export class Right {
-  constructor(readonly result: Record<string, unknown> | null) {}
+export class Right<T extends Record<string, unknown>> {
+  constructor(private readonly result: T) {}
 
-  unwrap(): UnwrappedRight {
+  unwrap(): UnwrappedRight<T> {
     return this.result;
   }
 }
@@ -36,7 +36,7 @@ class Either {
     return obj instanceof Left;
   }
 
-  public static isRight(obj: unknown): obj is Right {
+  public static isRight(obj: unknown): obj is Right<Record<string, unknown>> {
     return obj instanceof Right;
   }
 
@@ -44,8 +44,10 @@ class Either {
     return new Left(exception);
   }
 
-  public static toRight(result: Record<string, unknown> | null): Right {
-    return new Right(result);
+  public static toRight<T extends Record<string, unknown>>(
+    result: T
+  ): Right<T> {
+    return new Right<T>(result);
   }
 }
 

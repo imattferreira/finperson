@@ -1,11 +1,13 @@
 import { z } from 'zod';
+import Either, { Left, Right } from './either';
+import InvalidFormatException from '../exceptions/invalid-format-exception';
 
 const custom = {
   json: <O extends Record<string, unknown>, T extends z.ZodTypeDef, I>(
     data: string | null,
     schema: z.ZodType<O, T, I>
-  ) => {
-    return z
+  ): Left | Right<O> => {
+    const parsed = z
       .custom<string>((json) => {
         try {
           if (!json) {
@@ -20,7 +22,16 @@ const custom = {
       }, 'invalid json')
       .transform((str) => JSON.parse(str))
       .pipe(schema)
-      .parse(data);
+      .safeParse(data);
+
+    if (parsed.success) {
+      return Either.toRight(parsed.data);
+    }
+
+    // consider only the first parser error
+    return Either.toLeft(
+      new InvalidFormatException(parsed.error.errors[0].message)
+    );
   }
 };
 
