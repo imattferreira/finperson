@@ -1,3 +1,8 @@
+export const encodeBase64 = (str: string): string =>
+  Buffer.from(str).toString('base64url');
+
+export const decodeBase64 = (str: string): string => atob(str);
+
 export function snakecase(str: string): string {
   const result = [];
 

@@ -3,6 +3,8 @@ import { camelcase, snakecase } from './string';
 const isObj = (obj: unknown): obj is Obj =>
   typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
+export const stringify = (obj: unknown): string => JSON.stringify(obj);
+
 export function snake<T = Obj>(obj: Obj): Obj {
   const result: Partial<T> = {};
 

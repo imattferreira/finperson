@@ -2,7 +2,7 @@ import UsersRepository from '../../domain/authentication/repository/implementati
 import UnauthorizedException from '../../exceptions/unauthorized-exception';
 import Either from '../../lib/either';
 import { reject } from '../../lib/handler';
-import { decodeToken, isValidToken } from '../../lib/token';
+import { decodeToken, isTokenValid } from '../../lib/token';
 import type { Domain } from '../../types/domain';
 
 const ensureAuthentication: Domain.Middleware = async (event: Domain.Event) => {
@@ -18,7 +18,7 @@ const ensureAuthentication: Domain.Middleware = async (event: Domain.Event) => {
 
   const token = auth.split(' ').at(-1);
 
-  if (!isValidToken(token)) {
+  if (!isTokenValid(token)) {
     return reject(
       Either.toLeft(
         new UnauthorizedException('invalid authentication or is expired')
