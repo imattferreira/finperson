@@ -1,5 +1,5 @@
 service: api
-frameworkVersion: "3"
+frameworkVersion: '3'
 
 package:
   individually: true
@@ -15,7 +15,7 @@ provider:
   httpApi:
     cors: true
   environment:
-    NODE_OPTIONS: "--enable-source-maps"
+    NODE_OPTIONS: '--enable-source-maps'
 
 params:
   default:
@@ -39,7 +39,7 @@ custom:
     keepNames: true
     watch:
       pattern:
-        - "src/**/*.ts"
+        - 'src/**/*.ts'
     exclude: ${param:esbuildExclude}
 
 functions:
