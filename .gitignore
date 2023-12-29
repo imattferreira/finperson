@@ -1,5 +1,8 @@
 node_modules/
 
+# build apps stuff
+.esbuild
+
 # env files
 .env
 .env.development
