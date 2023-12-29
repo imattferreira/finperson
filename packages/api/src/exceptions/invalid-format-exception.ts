@@ -3,7 +3,7 @@ import CustomException from './custom-exception';
 
 class InvalidFormatException extends CustomException {
   constructor(message: string) {
-    super(message, HandlerStatus.BAD);
+    super(message, HandlerStatus.BAD, 'invalid_format');
   }
 }
 

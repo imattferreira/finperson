@@ -3,7 +3,7 @@ import CustomException from './custom-exception';
 
 class ConflictException extends CustomException {
   constructor(message: string) {
-    super(message, HandlerStatus.CONFLICT);
+    super(message, HandlerStatus.CONFLICT, 'conflict');
   }
 }
 

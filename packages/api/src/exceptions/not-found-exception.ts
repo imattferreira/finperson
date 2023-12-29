@@ -3,7 +3,7 @@ import CustomException from './custom-exception';
 
 class NotFoundException extends CustomException {
   constructor(message: string) {
-    super(message, HandlerStatus.NOT_FOUND);
+    super(message, HandlerStatus.NOT_FOUND, 'not_found');
   }
 }
 
