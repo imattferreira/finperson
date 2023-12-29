@@ -43,15 +43,24 @@ custom:
     exclude: ${param:esbuildExclude}
 
 functions:
+  # authentication module
   auth:
     handler: src/infra/routes/auth/index.POST
     events:
       - httpApi:
           path: /auth
           method: post
+  # users module
   createUser:
     handler: src/infra/routes/users/index.POST
     events:
       - httpApi:
           path: /users
+          method: post
+  # transactions module
+  createTransaction:
+    handler: src/infra/routes/transactions/index.POST
+    events:
+      - httpApi:
+          path: /transactions
           method: post
