@@ -1,4 +1,4 @@
-import Either, { Left, Right } from '../../../../lib/either';
+import Either, { Left, Right } from '@/lib/either';
 import Transaction from '../../entities/transaction';
 import TransactionTypes from '../../entities/transaction-types';
 import ITransactionsRepository from '../../repositories/interfaces/itransactions-repository';

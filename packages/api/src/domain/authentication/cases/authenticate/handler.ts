@@ -1,10 +1,10 @@
-import HandlerStatus from '../../../../constants/handler-status';
-import { type Domain } from '../../../../types/domain';
-import { reject, resolve } from '../../../../lib/handler';
-import parser from '../../../../lib/parser';
+import HandlerStatus from '@/constants/handler-status';
+import type { Domain } from '@/types/domain';
+import { reject, resolve } from '@/lib/handler';
+import parser from '@/lib/parser';
 import AuthenticateUseCase from './use-case';
 import { receivedFieldsSchema } from './schemas';
-import Either from '../../../../lib/either';
+import Either from '@/lib/either';
 
 class AuthenticateHandler {
   constructor(private readonly useCase: AuthenticateUseCase) {}

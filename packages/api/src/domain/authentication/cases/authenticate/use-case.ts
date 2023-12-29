@@ -1,5 +1,5 @@
 import InvalidFormatException from '../../../../exceptions/invalid-format-exception';
-import Either, { Left, Right } from '../../../../lib/either';
+import Either, { Left, Right } from '@/lib/either';
 import { comparePassword, encryptPassword } from '../../entities/user';
 import IUsersRepository from '../../repository/interfaces/iusers-repository';
 import type { AuthenticateReceivedFields } from './schemas';

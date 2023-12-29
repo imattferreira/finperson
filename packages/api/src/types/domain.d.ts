@@ -1,4 +1,4 @@
-import HandlerStatus from '../constants/handler-status';
+import HandlerStatus from '@/constants/handler-status';
 
 declare namespace Domain {
   interface EventContext {

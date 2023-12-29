@@ -1,4 +1,4 @@
-import createUserFactory from '../../../domain/users/cases/create-user';
+import createUserFactory from '@/domain/users/cases/create-user';
 
 const POST = createUserFactory();
 

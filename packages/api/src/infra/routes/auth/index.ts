@@ -1,4 +1,4 @@
-import authenticateFactory from '../../../domain/authentication/cases/authenticate';
+import authenticateFactory from '@/domain/authentication/cases/authenticate';
 
 // TODO treat server errors
 const POST = authenticateFactory();

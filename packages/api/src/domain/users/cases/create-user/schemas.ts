@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import parser from '../../../../lib/parser';
+import parser from '@/lib/parser';
 
 export type CreateUserReceivedFields = z.infer<typeof receivedFieldsSchema>;
 

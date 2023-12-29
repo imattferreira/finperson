@@ -6,4 +6,7 @@ export function isValidToken(token?: string): token is string {
   return true;
 }
 
-export function decodeToken<T extends Obj>(token: string): T {}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function decodeToken<T extends Obj>(token: string): T {
+  return { a: 'test' } as unknown as T;
+}

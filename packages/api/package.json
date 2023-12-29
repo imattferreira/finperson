@@ -6,7 +6,6 @@
   "scripts": {
     "sls": "./node_modules/.bin/sls",
     "start:dev": "export SLS_DEBUG=* && nr sls offline start --reloadHandler --noTimeout --stage local",
-    "sstart:dev": "npm run sls offline start --reloadHandler --noTimeout",
     "check:ts": "tsc --noEmit",
     "check:lint": "eslint . --ext .ts --fix",
     "check:style": "prettier --config .prettierrc 'src/**/*.ts' --write"

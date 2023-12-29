@@ -3,7 +3,7 @@ import UnauthorizedException from '../../exceptions/unauthorized-exception';
 import Either from '../../lib/either';
 import { reject } from '../../lib/handler';
 import { decodeToken, isValidToken } from '../../lib/token';
-import { type Domain } from '../../types/domain';
+import type { Domain } from '../../types/domain';
 
 const ensureAuthentication: Domain.Middleware = async (event: Domain.Event) => {
   const auth = event.headers['Authorization'];
