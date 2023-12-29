@@ -11,7 +11,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1
+  region: us-east-1 # TODO change
   httpApi:
     cors: true
   environment:
@@ -44,8 +44,8 @@ custom:
 
 functions:
   status:
-    handler: src/index.handler
+    handler: src/infra/routes/auth/index.POST
     events:
       - httpApi:
-          path: /
-          method: get
+          path: /auth
+          method: post

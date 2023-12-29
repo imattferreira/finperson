@@ -6,3 +6,6 @@ node_modules/
 # env files
 .env
 .env.development
+
+# mac stuff
+.DS_Store
