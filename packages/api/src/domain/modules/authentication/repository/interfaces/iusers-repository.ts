@@ -2,7 +2,7 @@ import User from '../../entities/user';
 
 interface IUsersRepository {
   create(user: User): Promise<void>;
-  findByEmail(email: string): Promise<User | null>;
+  findByEmail(email: string): Promise<Nullish<User>>;
   update(user: User): Promise<User>;
 }
 

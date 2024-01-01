@@ -5,8 +5,7 @@ const isObj = (obj: unknown): obj is object =>
 
 export const stringify = (obj: unknown): string => JSON.stringify(obj);
 
-export const parseJson = <T extends Record<string, unknown>>(obj: string): T =>
-  JSON.parse(obj);
+export const parseJson = <T extends object>(obj: string): T => JSON.parse(obj);
 
 export function snake<T = object>(obj: object): object {
   const result: Partial<T> = {};
@@ -24,7 +23,7 @@ export function snake<T = object>(obj: object): object {
       if (isObj(_obj[key])) {
         curr[snakedKey] = {};
 
-        handler(_obj[key] as Obj, curr[snakedKey] as Obj);
+        handler(_obj[key] as object, curr[snakedKey] as object);
         continue;
       }
 
@@ -53,7 +52,7 @@ export function camel<T = object>(obj: object): object {
       if (isObj(_obj[key])) {
         curr[cameldKey] = {};
 
-        handler(_obj[key] as Obj, curr[cameldKey] as Obj);
+        handler(_obj[key] as object, curr[cameldKey] as object);
         continue;
       }
 

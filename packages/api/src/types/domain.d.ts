@@ -7,8 +7,8 @@ declare namespace Domain {
     };
   }
 
-  export interface Event {
-    body: string | null;
+  interface Event {
+    body: Nullish<string>;
     headers: Record<string, string>;
     metadata?: EventContext;
   }

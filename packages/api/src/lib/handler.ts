@@ -5,7 +5,7 @@ import { snake } from './object';
 
 function response(
   status: Domain.OutputStatuses,
-  body: object | null
+  body: Nullish<object>
 ): Domain.Output {
   const response: Domain.Output = {
     statusCode: status
@@ -18,7 +18,7 @@ function response(
   return response;
 }
 
-export function reject(unwrapped: Copy<UnwrappedLeft>) {
+export function reject(unwrapped: UnwrappedLeft) {
   return response(unwrapped.statusCode, unwrapped);
 }
 

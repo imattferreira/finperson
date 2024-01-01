@@ -59,7 +59,7 @@ export function isTokenValid(token?: string): token is string {
     return false;
   }
 
-  const { exp } = parseJson<Copy<TokenPayload>>(decodeBase64(payload));
+  const { exp } = parseJson<TokenPayload>(decodeBase64(payload));
 
   if (!exp || now() > exp) {
     return false;

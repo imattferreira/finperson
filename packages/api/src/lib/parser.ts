@@ -5,8 +5,8 @@ import InvalidFormatException from '@/exceptions/invalid-format-exception';
 import Either, { Left, Right } from './either';
 
 const custom = {
-  json: <O extends Obj, T extends z.ZodTypeDef, I>(
-    data: string | null,
+  json: <O extends object, T extends z.ZodTypeDef, I>(
+    data: Nullish<string>,
     schema: z.ZodType<O, T, I>
   ): Left | Right<O> => {
     const parsed = z
