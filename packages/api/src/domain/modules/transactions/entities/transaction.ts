@@ -24,9 +24,6 @@ class Transaction extends Entity<
     createdAt,
     updatedAt
   }: TransactionFields): Transaction {
-    // TODO validate value
-    // if (!parser.number().min(1).max(100_000_000)) {}
-
     return new Transaction(
       { category, operation, recurrence, value: floatToInt(value) },
       { id, createdAt, updatedAt }

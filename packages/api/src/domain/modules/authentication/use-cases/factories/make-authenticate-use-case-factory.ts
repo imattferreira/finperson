@@ -1,4 +1,5 @@
-import makeUsersRepositoryFactory from '../../repository/factories/make-users-repository-factory';
+import makeUsersRepositoryFactory from '@/modules/users/repository/factories/make-users-repository-factory';
+
 import AuthenticateUseCase from '../authenticate-use-case';
 
 const makeAuthenticateUseCaseFactory = () =>

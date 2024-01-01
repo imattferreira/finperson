@@ -2,11 +2,11 @@ import AbstractUseCase from '@/domain/shared/abstract-use-case';
 import InvalidFormatException from '@/exceptions/invalid-format-exception';
 import Either, { Left, Right } from '@/lib/either';
 import { createToken } from '@/lib/token';
+import PasswordHash from '@/modules/users/entities/password-hash';
+import IUsersRepository from '@/modules/users/repository/interfaces/iusers-repository';
 import type { TokenPayload } from '@/types/token';
 
 import type { AuthenticateReceivedFields } from '../dtos/authenticate-dtos';
-import PasswordHash from '../../users/entities/password-hash';
-import IUsersRepository from '../repository/interfaces/iusers-repository';
 
 interface Input {
   fields: AuthenticateReceivedFields;

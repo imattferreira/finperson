@@ -1,4 +1,4 @@
-import makeUsersRepositoryFactory from '@/modules/authentication/repository/factories/make-users-repository-factory';
+import makeUsersRepositoryFactory from '@/domain/modules/users/repository/factories/make-users-repository-factory';
 
 import CreateUserUseCase from '../create-user-use-case';
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import User from '../../../users/entities/user';
+import User from '../../entities/user';
 import IUsersRepository from '../interfaces/iusers-repository';
 
 class UsersRepository implements IUsersRepository {

@@ -23,6 +23,8 @@ class CreateTransactionUseCase implements AbstractUseCase<Input, Output> {
     if (fields.recurrence) {
       // validate recurrence date
       // verify if transaction name already exists in recurrence
+      // verify if each is valid when recurrence is MONTH
+      // verify if each is valid when recurrence is YEAR
     }
 
     if (fields.future) {

@@ -17,9 +17,6 @@ class User extends Entity<Omit<UserFields, 'id' | 'createdAt' | 'updatedAt'>> {
     createdAt,
     updatedAt
   }: UserFields): User {
-    // TODO validate if email is valid
-    // if (parser.string().email().parse(email)) {}
-
     return new User({ email, name, password }, { id, createdAt, updatedAt });
   }
 

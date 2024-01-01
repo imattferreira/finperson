@@ -5,13 +5,10 @@ class PasswordHash {
   #salt = 10;
 
   constructor(plainText: string, isHashed = false) {
-    // TODO validate if password is valid
-    // if (parser.password().parse(plainText)) {}
-
     this.#value = isHashed ? plainText : this.hash(plainText);
   }
 
-  static create(plainText: string, isHashed?: boolean): PasswordHash {
+  static create(plainText: string, isHashed = false): PasswordHash {
     return new PasswordHash(plainText, isHashed);
   }
 

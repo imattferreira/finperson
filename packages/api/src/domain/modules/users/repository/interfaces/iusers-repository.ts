@@ -1,4 +1,4 @@
-import User from '../../../users/entities/user';
+import User from '../../entities/user';
 
 interface IUsersRepository {
   create(user: User): Promise<void>;
