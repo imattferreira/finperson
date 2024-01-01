@@ -1,4 +1,4 @@
-import HandlerStatus from '@/constants/handler-status';
+import OutputStatus from '@/constants/output-status';
 
 declare namespace Domain {
   interface EventContext {
@@ -13,17 +13,16 @@ declare namespace Domain {
     ctx?: EventContext;
   }
 
-  export type Middleware = (event: Event) => Promise<Domain.Response | void>;
+  export type Middleware = (event: Event) => Promise<Domain.Output | void>;
 
-  type Handler = (event: Domain.Event) => Promise<Domain.Response>;
+  type Handler = (event: Domain.Event) => Promise<Domain.Output>;
 
   export type Factory = () => Handler;
 
-  export type ResponseStatuses =
-    (typeof HandlerStatus)[keyof typeof HandlerStatus];
+  export type OutputStatuses = (typeof OutputStatus)[keyof typeof OutputStatus];
 
-  export interface Response {
-    statusCode: ResponseStatuses;
+  export interface Output {
+    statusCode: OutputStatuses;
     body?: string;
   }
 }

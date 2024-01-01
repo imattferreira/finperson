@@ -2,13 +2,13 @@ import CustomException from '@/exceptions/custom-exception';
 import type { Domain } from '@/types/domain';
 
 export interface UnwrappedLeft {
-  statusCode: Domain.ResponseStatuses;
+  statusCode: Domain.OutputStatuses;
   message: string;
   type: string;
   timestamp: string;
 }
 
-export type UnwrappedRight<T> = T;
+export type UnwrappedRight<T extends object> = T;
 
 export class Left {
   constructor(private readonly exception: CustomException) {}
@@ -23,7 +23,7 @@ export class Left {
   }
 }
 
-export class Right<T extends Nullish<Obj>> {
+export class Right<T extends object> {
   constructor(private readonly result: T) {}
 
   unwrap(): UnwrappedRight<T> {
@@ -44,7 +44,7 @@ class Either {
     return new Left(exception);
   }
 
-  public static toRight<T extends Nullish<Obj>>(result: T): Right<T> {
+  public static toRight<T extends object>(result: T): Right<T> {
     return new Right<T>(result);
   }
 }

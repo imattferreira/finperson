@@ -4,10 +4,10 @@ import { type UnwrappedLeft, type UnwrappedRight } from './either';
 import { snake } from './object';
 
 function response(
-  status: Domain.ResponseStatuses,
-  body: Obj | null
-): Domain.Response {
-  const response: Domain.Response = {
+  status: Domain.OutputStatuses,
+  body: object | null
+): Domain.Output {
+  const response: Domain.Output = {
     statusCode: status
   };
 
@@ -23,8 +23,8 @@ export function reject(unwrapped: Copy<UnwrappedLeft>) {
 }
 
 export function resolve(
-  status: Domain.ResponseStatuses,
-  unwrapped: UnwrappedRight<Obj>
+  status: Domain.OutputStatuses,
+  unwrapped: UnwrappedRight<object>
 ) {
   return response(status, unwrapped);
 }

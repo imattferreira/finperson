@@ -1,4 +1,4 @@
-const HandlerStatus = {
+const OutputStatus = {
   OK: 200,
   CREATED: 201,
   BAD: 400,
@@ -7,4 +7,4 @@ const HandlerStatus = {
   CONFLICT: 409
 } as const;
 
-export default HandlerStatus;
+export default OutputStatus;

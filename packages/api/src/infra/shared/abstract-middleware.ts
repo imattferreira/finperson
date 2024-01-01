@@ -1,0 +1,7 @@
+import type { Domain } from '@/types/domain';
+
+abstract class AbstractMiddleware {
+  abstract intermediateWith(event: Domain.Event): Promise<Domain.Output>;
+}
+
+export default AbstractMiddleware;

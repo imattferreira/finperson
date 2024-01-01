@@ -24,7 +24,7 @@ const getPayload = (content: Obj): TokenPayload => ({
 const getSignature = (checksum: string) =>
   createHmac(algorithm, secret).update(checksum).digest('base64url');
 
-export function createToken(content: Obj): string {
+export function createToken<T extends object>(content: T): string {
   const header = encodeBase64(stringify(getHeader()));
   const payload = encodeBase64(stringify(getPayload(content)));
   const checksum = header + '.' + payload;
@@ -68,7 +68,7 @@ export function isTokenValid(token?: string): token is string {
   return true;
 }
 
-export function decodeToken<T extends Obj>(token: string): T {
+export function decodeToken<T extends object>(token: string): T {
   const payload = token.split('.')[1];
   const { sub } = JSON.parse(decodeBase64(payload));
 

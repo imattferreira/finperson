@@ -1,6 +1,6 @@
 import { camelcase, snakecase } from './string';
 
-const isObj = (obj: unknown): obj is Obj =>
+const isObj = (obj: unknown): obj is object =>
   typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
 export const stringify = (obj: unknown): string => JSON.stringify(obj);
@@ -8,10 +8,10 @@ export const stringify = (obj: unknown): string => JSON.stringify(obj);
 export const parseJson = <T extends Record<string, unknown>>(obj: string): T =>
   JSON.parse(obj);
 
-export function snake<T = Obj>(obj: Obj): Obj {
+export function snake<T = object>(obj: object): object {
   const result: Partial<T> = {};
 
-  function handler(_obj: Obj, curr: Obj) {
+  function handler(_obj: object, curr: object) {
     if (!isObj(_obj)) {
       return curr;
     }
@@ -37,10 +37,10 @@ export function snake<T = Obj>(obj: Obj): Obj {
   return result;
 }
 
-export function camel<T = Obj>(obj: Obj): Obj {
+export function camel<T = object>(obj: object): object {
   const result: Partial<T> = {};
 
-  function handler(_obj: Obj, curr: Obj) {
+  function handler(_obj: object, curr: object) {
     if (!isObj(_obj)) {
       return curr;
     }

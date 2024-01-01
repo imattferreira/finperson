@@ -1,12 +1,12 @@
 import { Domain } from '@/types/domain';
 
 class CustomException extends Error {
-  public statusCode: Domain.ResponseStatuses;
+  public statusCode: Domain.OutputStatuses;
   public type: string;
 
   constructor(
     message: string,
-    statusCode: Domain.ResponseStatuses,
+    statusCode: Domain.OutputStatuses,
     type: string
   ) {
     super(message);

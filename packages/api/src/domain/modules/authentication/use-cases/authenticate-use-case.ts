@@ -1,16 +1,27 @@
+import AbstractUseCase from '@/domain/shared/abstract-use-case';
+import InvalidFormatException from '@/exceptions/invalid-format-exception';
 import Either, { Left, Right } from '@/lib/either';
+import { createToken } from '@/lib/token';
+import { TokenPayload } from '@/types/token';
 
-import InvalidFormatException from '../../../../exceptions/invalid-format-exception';
 import type { AuthenticateReceivedFields } from '../dtos/authenticate-dtos';
 import { comparePassword, encryptPassword } from '../entities/user';
 import IUsersRepository from '../repository/interfaces/iusers-repository';
 
-class AuthenticateUseCase {
-  constructor(private readonly usersRepository: IUsersRepository) {}
+interface Input {
+  fields: AuthenticateReceivedFields;
+}
 
-  async execute(
-    fields: AuthenticateReceivedFields
-  ): Promise<Left | Right<Obj>> {
+interface Output {
+  user: {
+    email: string;
+  };
+  token: string;
+}
+
+class AuthenticateUseCase implements AbstractUseCase<Input, Output> {
+  constructor(private readonly usersRepository: IUsersRepository) {}
+  async execute({ fields }: Input): Promise<Left | Right<Output>> {
     const user = await this.usersRepository.findByEmail(fields.email);
 
     if (!user) {
@@ -29,8 +40,7 @@ class AuthenticateUseCase {
 
     await this.usersRepository.update(user);
 
-    // TODO
-    const token = '';
+    const token = createToken<TokenPayload>({ userId: user.id });
 
     return Either.toRight({
       user: {

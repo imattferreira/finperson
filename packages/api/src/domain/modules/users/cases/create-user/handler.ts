@@ -1,4 +1,4 @@
-import HandlerStatus from '@/constants/handler-status';
+import OutputStatus from '@/constants/output-status';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
@@ -10,7 +10,7 @@ import CreateUserUseCase from './use-case';
 class CreateUserHandler {
   constructor(private readonly useCase: CreateUserUseCase) {}
 
-  async handleWith(event: Domain.Event): Promise<Domain.Response> {
+  async handleWith(event: Domain.Event): Promise<Domain.Output> {
     const receivedFields = parser.json(event.body, receivedFieldsSchema);
 
     if (Either.isLeft(receivedFields)) {
@@ -23,7 +23,7 @@ class CreateUserHandler {
       return reject(executed.unwrap());
     }
 
-    return resolve(HandlerStatus.CREATED, executed.unwrap());
+    return resolve(OutputStatus.CREATED, executed.unwrap());
   }
 }
 

@@ -10,7 +10,8 @@
     "skipLibCheck": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/modules/*": ["./src/domain/modules/*"]
     }
   }
 }
