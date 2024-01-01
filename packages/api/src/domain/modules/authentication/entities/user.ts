@@ -1,19 +1,14 @@
-import Entity from '@/core/entities/entity';
-import Timestamp from '@/core/entities/timestamp';
-import UniqueEntityID from '@/core/entities/unique-entity-id';
+import Entity, { type EntityRequiredFields } from '@/core/entities/entity';
 
 import PasswordHash from './password-hash';
 
-interface UserStored {
-  id?: UniqueEntityID;
+interface UserFields extends Partial<EntityRequiredFields> {
   name: string;
   email: string;
   password: PasswordHash;
-  createdAt?: Timestamp;
-  updatedAt?: Timestamp;
 }
 
-class User extends Entity<Omit<UserStored, 'id' | 'createdAt' | 'updatedAt'>> {
+class User extends Entity<Omit<UserFields, 'id' | 'createdAt' | 'updatedAt'>> {
   static create({
     id,
     email,
@@ -21,25 +16,25 @@ class User extends Entity<Omit<UserStored, 'id' | 'createdAt' | 'updatedAt'>> {
     password,
     createdAt,
     updatedAt
-  }: UserStored): User {
+  }: UserFields): User {
     // TODO validate if email is valid
     return new User({ email, name, password }, { id, createdAt, updatedAt });
   }
 
   get name(): string {
-    return this.stored.name;
+    return this.fields.name;
   }
 
   get email(): string {
-    return this.stored.email;
+    return this.fields.email;
   }
 
   get password(): PasswordHash {
-    return this.stored.password;
+    return this.fields.password;
   }
 
   set password(password: PasswordHash) {
-    this.stored.password = password;
+    this.fields.password = password;
 
     this.touch();
   }

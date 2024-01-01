@@ -1,7 +1,7 @@
 import Timestamp from './timestamp';
 import UniqueEntityID from './unique-entity-id';
 
-interface EntityStored {
+export interface EntityRequiredFields {
   id: UniqueEntityID;
   createdAt: Timestamp;
   updatedAt: Timestamp;
@@ -11,7 +11,7 @@ class Entity<Stored> {
   #id: UniqueEntityID;
   #createdAt: Timestamp;
   #updatedAt: Timestamp;
-  protected stored: Required<Stored>;
+  protected fields: Required<Stored>;
 
   constructor(
     data: Required<Stored>,
@@ -19,9 +19,9 @@ class Entity<Stored> {
       id = new UniqueEntityID(),
       createdAt = new Timestamp(),
       updatedAt = new Timestamp()
-    }: Partial<EntityStored>
+    }: Partial<EntityRequiredFields>
   ) {
-    this.stored = data;
+    this.fields = data;
     this.#id = id;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;

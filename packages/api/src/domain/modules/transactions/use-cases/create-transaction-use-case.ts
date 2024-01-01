@@ -3,7 +3,9 @@ import Either, { Left, Right } from '@/lib/either';
 
 import { CreateTransactionReceivedFields } from '../dtos/create-transaction-dtos';
 import Transaction from '../entities/transaction';
-import TransactionTypes from '../entities/transaction-types';
+import TransactionOperation from '../entities/transaction-operation';
+import TransactionRecurrence from '../entities/transaction-recurrence-types';
+import TransactionCategory from '../entities/transactions-categories';
 import ITransactionsRepository from '../repositories/interfaces/itransactions-repository';
 
 interface Input {
@@ -29,11 +31,18 @@ class CreateTransactionUseCase implements AbstractUseCase<Input, Output> {
 
     // verify if transaction name already exists in this month
 
-    if (fields.type === TransactionTypes.WITHDRAW) {
+    if (fields.operation === 'WITHDRAW') {
       // verify if user as money to withdraw
     }
 
-    const transaction = new Transaction();
+    const transaction = Transaction.create({
+      category: TransactionCategory.create(fields.category),
+      operation: TransactionOperation.create(fields.operation),
+      recurrence: fields.recurrence
+        ? TransactionRecurrence.create(fields.recurrence)
+        : null,
+      value: fields.value
+    });
 
     return Either.toRight(transaction);
   }

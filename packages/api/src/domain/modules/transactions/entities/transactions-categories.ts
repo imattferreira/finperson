@@ -1,4 +1,4 @@
-const TransactionCategories = {
+export const AvailableCategoriesEnum = {
   CLOTHES: 'CLOTHES',
   EDUCATION: 'EDUCATION',
   FOOD: 'FOOD',
@@ -7,4 +7,22 @@ const TransactionCategories = {
   TRANSPORT: 'TRANSPORT'
 } as const;
 
-export default TransactionCategories;
+type AvailableCategories = InlineEnum<typeof AvailableCategoriesEnum>;
+
+class TransactionCategory {
+  #value: AvailableCategories;
+
+  constructor(value: AvailableCategories) {
+    this.#value = value;
+  }
+
+  static create(value: AvailableCategories): TransactionCategory {
+    return new TransactionCategory(value);
+  }
+
+  public toString(): AvailableCategories {
+    return this.#value;
+  }
+}
+
+export default TransactionCategory;

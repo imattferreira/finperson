@@ -9,7 +9,7 @@ class PasswordHash {
     this.#value = isHashed ? plainText : this.hash(plainText);
   }
 
-  static create(plainText: string, isHashed = false): PasswordHash {
+  static create(plainText: string, isHashed?: boolean): PasswordHash {
     return new PasswordHash(plainText, isHashed);
   }
 

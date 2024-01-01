@@ -5,7 +5,7 @@ class Timestamp {
     this.#value = value ?? new Date().toUTCString();
   }
 
-  static create(value = new Date().toISOString()): Timestamp {
+  static create(value?: string): Timestamp {
     return new Timestamp(value);
   }
 
