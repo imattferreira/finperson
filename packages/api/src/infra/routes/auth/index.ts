@@ -1,6 +1,6 @@
-import authenticateFactory from '@/domain/authentication/cases/authenticate';
+import makeAuthenticateFactory from '@/domain/authentication/factories/make-authenticate-factory';
 
 // TODO treat server errors
-const POST = authenticateFactory();
+const POST = makeAuthenticateFactory();
 
 export { POST };

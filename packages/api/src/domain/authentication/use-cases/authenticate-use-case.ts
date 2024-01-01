@@ -1,9 +1,9 @@
 import Either, { Left, Right } from '@/lib/either';
 
-import InvalidFormatException from '../../../../exceptions/invalid-format-exception';
-import { comparePassword, encryptPassword } from '../../entities/user';
-import IUsersRepository from '../../repository/interfaces/iusers-repository';
-import type { AuthenticateReceivedFields } from './schemas';
+import InvalidFormatException from '../../../exceptions/invalid-format-exception';
+import type { AuthenticateReceivedFields } from '../dtos/authenticate-dtos';
+import { comparePassword, encryptPassword } from '../entities/user';
+import IUsersRepository from '../repository/interfaces/iusers-repository';
 
 class AuthenticateUseCase {
   constructor(private readonly usersRepository: IUsersRepository) {}

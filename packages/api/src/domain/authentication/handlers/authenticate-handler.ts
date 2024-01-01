@@ -4,8 +4,8 @@ import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
 import type { Domain } from '@/types/domain';
 
-import { receivedFieldsSchema } from './schemas';
-import AuthenticateUseCase from './use-case';
+import { receivedFieldsSchema } from '../dtos/authenticate-dtos';
+import AuthenticateUseCase from '../use-cases/authenticate-use-case';
 
 class AuthenticateHandler {
   constructor(private readonly useCase: AuthenticateUseCase) {}

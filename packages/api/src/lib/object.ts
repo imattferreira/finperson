@@ -5,6 +5,9 @@ const isObj = (obj: unknown): obj is Obj =>
 
 export const stringify = (obj: unknown): string => JSON.stringify(obj);
 
+export const parseJson = <T extends Record<string, unknown>>(obj: string): T =>
+  JSON.parse(obj);
+
 export function snake<T = Obj>(obj: Obj): Obj {
   const result: Partial<T> = {};
 
