@@ -1,4 +1,4 @@
-import UsersRepository from '../../domain/authentication/repository/implementations/users-repository';
+import UsersRepository from '../../domain/modules/authentication/repository/implementations/users-repository';
 import UnauthorizedException from '../../exceptions/unauthorized-exception';
 import Either from '../../lib/either';
 import { reject } from '../../lib/handler';

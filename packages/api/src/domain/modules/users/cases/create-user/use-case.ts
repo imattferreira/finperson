@@ -1,7 +1,7 @@
 // TODO boundary-contexts
 import Either, { Left, Right } from '@/lib/either';
 
-import ConflictException from '../../../../exceptions/conflict-exception';
+import ConflictException from '../../../../../exceptions/conflict-exception';
 import User, { encryptPassword } from '../../../authentication/entities/user';
 import IUsersRepository from '../../../authentication/repository/interfaces/iusers-repository';
 import { CreateUserReceivedFields } from './schemas';
