@@ -19,6 +19,10 @@ class TransactionRecurrence {
 
   constructor({ each, recurrence, repeatTimes }: TransactionRecurrenceFields) {
     // TODO validate fields
+    // if (!parser.number().min(1).max(31).parse(each)) {}
+    // if (recurrence === 'MONTH' && !parser.number().min(1).max(12).parse(each)) {}
+    // if (repeatTimes && !parser.number().min(1).parse(repeatTimes)) {}
+
     this.#each = each;
     this.#recurrence = recurrence;
     this.#repeatTimes = repeatTimes ?? 0;

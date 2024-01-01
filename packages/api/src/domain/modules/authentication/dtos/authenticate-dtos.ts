@@ -6,5 +6,5 @@ export type AuthenticateReceivedFields = z.infer<typeof receivedFieldsSchema>;
 
 export const receivedFieldsSchema = parser.object({
   email: parser.string().email(),
-  password: parser.string()
+  password: parser.password()
 });

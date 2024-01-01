@@ -34,7 +34,8 @@ const custom = {
     return Either.toLeft(
       new InvalidFormatException(parsed.error.errors[0].message)
     );
-  }
+  },
+  password: () => z.string().min(8).max(32)
 };
 
 export default Object.assign(custom, z);

@@ -2,10 +2,10 @@
 import AbstractUseCase from '@/domain/shared/abstract-use-case';
 import ConflictException from '@/exceptions/conflict-exception';
 import Either, { Left, Right } from '@/lib/either';
-import User from '@/modules/authentication/entities/user';
+import User from '@/domain/modules/users/entities/user';
 import IUsersRepository from '@/modules/authentication/repository/interfaces/iusers-repository';
 
-import PasswordHash from '../../authentication/entities/password-hash';
+import PasswordHash from '../entities/password-hash';
 import { type CreateUserReceivedFields } from '../dtos/create-user-dtos';
 
 interface Input {

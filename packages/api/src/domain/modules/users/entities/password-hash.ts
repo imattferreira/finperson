@@ -6,6 +6,8 @@ class PasswordHash {
 
   constructor(plainText: string, isHashed = false) {
     // TODO validate if password is valid
+    // if (parser.password().parse(plainText)) {}
+
     this.#value = isHashed ? plainText : this.hash(plainText);
   }
 

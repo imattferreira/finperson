@@ -5,7 +5,7 @@ import { createToken } from '@/lib/token';
 import type { TokenPayload } from '@/types/token';
 
 import type { AuthenticateReceivedFields } from '../dtos/authenticate-dtos';
-import PasswordHash from '../entities/password-hash';
+import PasswordHash from '../../users/entities/password-hash';
 import IUsersRepository from '../repository/interfaces/iusers-repository';
 
 interface Input {
