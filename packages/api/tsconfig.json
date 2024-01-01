@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/modules/*": ["./src/domain/modules/*"]
+      "@/modules/*": ["./src/domain/modules/*"],
+      "@/core/*": ["./src/domain/shared/*"]
     }
   }
 }

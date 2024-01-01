@@ -5,7 +5,7 @@ import { createToken } from '@/lib/token';
 import type { TokenPayload } from '@/types/token';
 
 import type { AuthenticateReceivedFields } from '../dtos/authenticate-dtos';
-import { comparePassword, encryptPassword } from '../entities/user';
+import PasswordHash from '../entities/password-hash';
 import IUsersRepository from '../repository/interfaces/iusers-repository';
 
 interface Input {
@@ -30,17 +30,17 @@ class AuthenticateUseCase implements AbstractUseCase<Input, Output> {
       );
     }
 
-    if (!comparePassword(user.password, fields.password)) {
+    if (!user.password.equals(fields.password)) {
       return Either.toLeft(
         new InvalidFormatException('invalid [email] or [password]')
       );
     }
 
-    user.password = encryptPassword(fields.password);
+    user.password = PasswordHash.create(fields.password);
 
     await this.usersRepository.update(user);
 
-    const token = createToken<TokenPayload>({ userId: user.id });
+    const token = createToken<TokenPayload>({ userId: user.id.toString() });
 
     return Either.toRight({
       user: {

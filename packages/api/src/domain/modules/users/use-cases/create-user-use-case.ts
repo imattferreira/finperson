@@ -2,9 +2,10 @@
 import AbstractUseCase from '@/domain/shared/abstract-use-case';
 import ConflictException from '@/exceptions/conflict-exception';
 import Either, { Left, Right } from '@/lib/either';
-import User, { encryptPassword } from '@/modules/authentication/entities/user';
+import User from '@/modules/authentication/entities/user';
 import IUsersRepository from '@/modules/authentication/repository/interfaces/iusers-repository';
 
+import PasswordHash from '../../authentication/entities/password-hash';
 import { type CreateUserReceivedFields } from '../dtos/create-user-dtos';
 
 interface Input {
@@ -24,10 +25,10 @@ class CreateUserUseCase implements AbstractUseCase<Input, Output> {
       return Either.toLeft(new ConflictException('[email] already exists'));
     }
 
-    const user = new User({
+    const user = User.create({
       name: fields.name,
       email: fields.email,
-      password: encryptPassword(fields.password)
+      password: PasswordHash.create(fields.password)
     });
 
     await this.usersRepository.create(user);

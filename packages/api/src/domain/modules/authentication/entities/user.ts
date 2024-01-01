@@ -1,55 +1,48 @@
-import { randomUUID } from 'node:crypto';
+import Entity from '@/core/entities/entity';
+import Timestamp from '@/core/entities/timestamp';
+import UniqueEntityID from '@/core/entities/unique-entity-id';
 
-class User {
-  #id: string;
-  #name: string;
-  #email: string;
-  #password: string;
+import PasswordHash from './password-hash';
 
-  constructor({
+interface UserStored {
+  id?: UniqueEntityID;
+  name: string;
+  email: string;
+  password: PasswordHash;
+  createdAt?: Timestamp;
+  updatedAt?: Timestamp;
+}
+
+class User extends Entity<Omit<UserStored, 'id' | 'createdAt' | 'updatedAt'>> {
+  static create({
     id,
-    name,
     email,
-    password
-  }: {
-    id?: string;
-    name: string;
-    email: string;
-    password: string;
-  }) {
-    this.#id = id ? id : randomUUID();
-    this.#name = name;
-    this.#email = email;
-    this.#password = password;
-  }
-
-  get id(): string {
-    return this.#id;
+    name,
+    password,
+    createdAt,
+    updatedAt
+  }: UserStored): User {
+    // TODO validate if email is valid
+    return new User({ email, name, password }, { id, createdAt, updatedAt });
   }
 
   get name(): string {
-    return this.#name;
+    return this.stored.name;
   }
 
   get email(): string {
-    return this.#email;
+    return this.stored.email;
   }
 
-  get password(): string {
-    return this.#password;
+  get password(): PasswordHash {
+    return this.stored.password;
   }
 
-  set password(data: string) {
-    this.#password = data;
+  set password(password: PasswordHash) {
+    this.stored.password = password;
+
+    this.touch();
   }
-}
-
-export function comparePassword(password: string, _password: string) {
-  return false;
-}
-
-export function encryptPassword(password: string) {
-  return '';
 }
 
 export default User;
