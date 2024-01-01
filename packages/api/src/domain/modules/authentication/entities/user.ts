@@ -1,20 +1,30 @@
+import { randomUUID } from 'node:crypto';
+
 class User {
+  #id: string;
   #name: string;
   #email: string;
   #password: string;
 
   constructor({
+    id,
     name,
     email,
     password
   }: {
+    id?: string;
     name: string;
     email: string;
     password: string;
   }) {
+    this.#id = id ? id : randomUUID();
     this.#name = name;
     this.#email = email;
     this.#password = password;
+  }
+
+  get id(): string {
+    return this.#id;
   }
 
   get name(): string {

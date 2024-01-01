@@ -10,12 +10,12 @@ const algorithm = 'sha256';
 interface TokenPayload {
   exp: number;
   iat: number;
-  sub: Obj;
+  sub: object;
 }
 
 const getHeader = () => ({ alg: 'HS256', typ: 'JWT' });
 
-const getPayload = (content: Obj): TokenPayload => ({
+const getPayload = (content: object): TokenPayload => ({
   exp: addDays(1),
   iat: now(),
   sub: content

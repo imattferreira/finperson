@@ -11,7 +11,7 @@ interface Input {
   fields: CreateUserReceivedFields;
 }
 
-interface Output {}
+type Output = null;
 
 class CreateUserUseCase implements AbstractUseCase<Input, Output> {
   constructor(private readonly usersRepository: IUsersRepository) {}

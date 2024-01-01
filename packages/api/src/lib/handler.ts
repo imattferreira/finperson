@@ -24,7 +24,7 @@ export function reject(unwrapped: Copy<UnwrappedLeft>) {
 
 export function resolve(
   status: Domain.OutputStatuses,
-  unwrapped: UnwrappedRight<object>
+  unwrapped: UnwrappedRight
 ) {
   return response(status, unwrapped);
 }

@@ -17,7 +17,9 @@ class CreateTransactionHandler {
       return reject(receivedFields.unwrap());
     }
 
-    const executed = await this.useCase.execute(receivedFields.unwrap());
+    const executed = await this.useCase.execute({
+      fields: receivedFields.unwrap()
+    });
 
     if (Either.isLeft(executed)) {
       return reject(executed.unwrap());

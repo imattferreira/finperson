@@ -8,7 +8,7 @@ export interface UnwrappedLeft {
   timestamp: string;
 }
 
-export type UnwrappedRight<T extends object> = T;
+export type UnwrappedRight<T = object | null> = T;
 
 export class Left {
   constructor(private readonly exception: CustomException) {}
@@ -23,7 +23,7 @@ export class Left {
   }
 }
 
-export class Right<T extends object> {
+export class Right<T = object | null> {
   constructor(private readonly result: T) {}
 
   unwrap(): UnwrappedRight<T> {
@@ -44,7 +44,7 @@ class Either {
     return new Left(exception);
   }
 
-  public static toRight<T extends object>(result: T): Right<T> {
+  public static toRight<T = object | null>(result: T): Right<T> {
     return new Right<T>(result);
   }
 }
