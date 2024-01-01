@@ -1,5 +1,5 @@
-import createUserFactory from '@/modules/users/cases/create-user';
+import makeCreateUserFactory from '@/domain/modules/users/factories/make-create-user-factory';
 
-const POST = createUserFactory();
+const POST = makeCreateUserFactory();
 
 export { POST };

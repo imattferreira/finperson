@@ -4,8 +4,8 @@ import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
 import type { Domain } from '@/types/domain';
 
-import { receivedFieldsSchema } from './schema';
-import CreateTransactionUseCase from './use-case';
+import { receivedFieldsSchema } from '../dtos/create-transaction-dtos';
+import CreateTransactionUseCase from '../use-cases/create-transaction-use-case';
 
 class CreateTransactionHandler {
   constructor(private readonly useCase: CreateTransactionUseCase) {}

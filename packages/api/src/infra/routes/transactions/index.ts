@@ -1,10 +1,10 @@
 import middleware from '@/infra/middlewares';
 import makeAuthenticationMiddlewareFactory from '@/infra/middlewares/factories/make-authentication-middleware-factory';
-import createTransactionFactory from '@/modules/transactions/cases/create-transaction';
+import makeCreateTransactionFactory from '@/modules/transactions/factories/make-create-transaction-factory';
 
 const POST = middleware(
   [makeAuthenticationMiddlewareFactory()],
-  createTransactionFactory()
+  makeCreateTransactionFactory()
 );
 
 export { POST };

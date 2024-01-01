@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 import parser from '@/lib/parser';
 
-import TransactionRecurrenceTypes from '../../entities/transaction-recurrence-types';
-import TransactionTypes from '../../entities/transaction-types';
-import TransactionCategories from '../../entities/transactions-categories';
+import TransactionRecurrenceTypes from '../entities/transaction-recurrence-types';
+import TransactionTypes from '../entities/transaction-types';
+import TransactionCategories from '../entities/transactions-categories';
 
 export type CreateTransactionReceivedFields = z.infer<
   typeof receivedFieldsSchema

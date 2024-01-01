@@ -1,18 +1,23 @@
+import AbstractUseCase from '@/domain/shared/abstract-use-case';
 import Either, { Left, Right } from '@/lib/either';
 
-import Transaction from '../../entities/transaction';
-import TransactionTypes from '../../entities/transaction-types';
-import ITransactionsRepository from '../../repositories/interfaces/itransactions-repository';
-import { CreateTransactionReceivedFields } from './schema';
+import { CreateTransactionReceivedFields } from '../dtos/create-transaction-dtos';
+import Transaction from '../entities/transaction';
+import TransactionTypes from '../entities/transaction-types';
+import ITransactionsRepository from '../repositories/interfaces/itransactions-repository';
 
-class CreateTransactionUseCase {
+interface Input {
+  fields: CreateTransactionReceivedFields;
+}
+
+// TODO padronize output returns
+interface Output {}
+
+class CreateTransactionUseCase implements AbstractUseCase<Input, Output> {
   constructor(
     private readonly transactionsRepository: ITransactionsRepository
   ) {}
-
-  async execute(
-    fields: CreateTransactionReceivedFields
-  ): Promise<Left | Right<Obj>> {
+  async execute({ fields }: Input): Promise<Left | Right<Output>> {
     if (fields.recurrence) {
       // validate recurrence date
       // verify if transaction name already exists in recurrence

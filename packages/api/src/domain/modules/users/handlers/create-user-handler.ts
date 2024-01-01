@@ -1,13 +1,14 @@
 import OutputStatus from '@/constants/output-status';
+import AbstractHandler from '@/domain/shared/abstract-handler';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
 import { Domain } from '@/types/domain';
 
-import { receivedFieldsSchema } from './schemas';
-import CreateUserUseCase from './use-case';
+import { receivedFieldsSchema } from '../dtos/create-user-dtos';
+import CreateUserUseCase from '../use-cases/create-user-use-case';
 
-class CreateUserHandler {
+class CreateUserHandler implements AbstractHandler {
   constructor(private readonly useCase: CreateUserUseCase) {}
 
   async handleWith(event: Domain.Event): Promise<Domain.Output> {
@@ -17,13 +18,15 @@ class CreateUserHandler {
       return reject(receivedFields.unwrap());
     }
 
-    const executed = await this.useCase.execute(receivedFields.unwrap());
+    const executed = await this.useCase.execute({
+      fields: receivedFields.unwrap()
+    });
 
     if (Either.isLeft(executed)) {
       return reject(executed.unwrap());
     }
 
-    return resolve(OutputStatus.CREATED, executed.unwrap());
+    return resolve(OutputStatus.NO_CONTENT, executed.unwrap());
   }
 }
 
