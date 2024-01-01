@@ -1,4 +1,4 @@
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 import AuthenticationMiddleware from '../authentication-middleware';
 

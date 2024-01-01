@@ -1,5 +1,5 @@
 import CustomException from '@/exceptions/custom-exception';
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 export interface UnwrappedLeft {
   statusCode: Domain.OutputStatuses;

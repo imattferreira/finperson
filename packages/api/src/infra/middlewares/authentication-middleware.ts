@@ -3,7 +3,7 @@ import AbstractMiddleware from '@/infra/shared/abstract-middleware';
 import Either from '@/lib/either';
 import { reject } from '@/lib/handler';
 import { decodeToken, isTokenValid } from '@/lib/token';
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 import type { TokenPayload } from '@/types/token';
 
 class AuthenticationMiddleware implements AbstractMiddleware {

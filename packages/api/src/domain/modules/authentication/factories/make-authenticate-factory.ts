@@ -1,4 +1,4 @@
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 import AuthenticateHandler from '../handlers/authenticate-handler';
 import makeAuthenticateUseCaseFactory from '../use-cases/factories/make-authenticate-use-case-factory';

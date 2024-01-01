@@ -3,7 +3,7 @@ import AbstractHandler from '@/domain/shared/abstract-handler';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 import { receivedFieldsSchema } from '../dtos/authenticate-dtos';
 import AuthenticateUseCase from '../use-cases/authenticate-use-case';

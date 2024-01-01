@@ -1,4 +1,4 @@
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 import CreateTransactionHandler from '../handlers/create-transaction-handler';
 import makeCreateTransactionUseCaseFactory from '../use-cases/factories/make-create-transaction-use-case-factory';

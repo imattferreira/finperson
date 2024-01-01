@@ -1,7 +1,7 @@
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 import { type UnwrappedLeft, type UnwrappedRight } from './either';
-import { snake } from './object';
+import { isObject, snake, stringify } from './object';
 
 function response(
   status: Domain.OutputStatuses,
@@ -11,8 +11,8 @@ function response(
     statusCode: status
   };
 
-  if (body) {
-    response.body = JSON.stringify(snake(body));
+  if (isObject(body)) {
+    response.body = stringify(snake(body));
   }
 
   return response;

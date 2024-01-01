@@ -1,66 +1,72 @@
 import { camelcase, snakecase } from './string';
 
-const isObj = (obj: unknown): obj is object =>
+export const isObject = (obj: unknown): obj is GenericRecord =>
   typeof obj === 'object' && !Array.isArray(obj) && obj !== null;
 
 export const stringify = (obj: unknown): string => JSON.stringify(obj);
 
 export const parseJson = <T extends object>(obj: string): T => JSON.parse(obj);
 
-export function snake<T = object>(obj: object): object {
-  const result: Partial<T> = {};
+export function snake(obj: GenericRecord): GenericRecord {
+  const result = {};
 
-  function handler(_obj: object, curr: object) {
-    if (!isObj(_obj)) {
-      return curr;
+  function _snake(temp: GenericRecord, converted: GenericRecord) {
+    if (!isObject(temp)) {
+      return converted;
     }
 
-    const keys = Object.keys(_obj);
+    const keys = Object.keys(temp);
 
     for (const key of keys) {
-      const snakedKey = snakecase(key);
+      const convertedKey = snakecase(key);
 
-      if (isObj(_obj[key])) {
-        curr[snakedKey] = {};
-
-        handler(_obj[key] as object, curr[snakedKey] as object);
+      if (!isObject(temp[key])) {
+        converted[convertedKey] = temp[key];
         continue;
       }
 
-      curr[snakedKey] = _obj[key];
+      converted[convertedKey] = {};
+
+      _snake(
+        temp[key] as GenericRecord,
+        converted[convertedKey] as GenericRecord
+      );
     }
   }
 
-  handler(obj, result);
+  _snake(obj, result);
 
   return result;
 }
 
-export function camel<T = object>(obj: object): object {
-  const result: Partial<T> = {};
+export function camel(obj: GenericRecord): GenericRecord {
+  const result = {};
 
-  function handler(_obj: object, curr: object) {
-    if (!isObj(_obj)) {
-      return curr;
+  function _camel(_obj: GenericRecord, converted: GenericRecord) {
+    if (!isObject(_obj)) {
+      return converted;
     }
 
     const keys = Object.keys(_obj);
 
     for (const key of keys) {
-      const cameldKey = camelcase(key);
+      const convertedKey = camelcase(key);
 
-      if (isObj(_obj[key])) {
-        curr[cameldKey] = {};
-
-        handler(_obj[key] as object, curr[cameldKey] as object);
+      if (!isObject(_obj[key])) {
+        converted[convertedKey] = _obj[key];
         continue;
       }
 
-      curr[cameldKey] = _obj[key];
+      converted[convertedKey] = {};
+
+      _camel(
+        _obj[key] as GenericRecord,
+        converted[convertedKey] as GenericRecord
+      );
     }
   }
 
-  handler(obj, result);
+  _camel(obj, result);
 
   return result;
 }

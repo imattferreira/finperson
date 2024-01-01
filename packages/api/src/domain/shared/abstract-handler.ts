@@ -1,4 +1,4 @@
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 abstract class AbstractHandler {
   abstract handleWith(event: Domain.Event): Promise<Domain.Output>;

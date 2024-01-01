@@ -1,4 +1,4 @@
-import type { Domain } from '@/types/domain';
+import * as Domain from '@/types/domain';
 
 import CreateUserHandler from '../handlers/create-user-handler';
 import makeCreateUserUseCaseFactory from '../use-cases/factories/make-create-user-use-case-factory';
