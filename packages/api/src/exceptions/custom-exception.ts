@@ -1,4 +1,4 @@
-import { Domain } from '@/types/domain';
+import type { Domain } from '@/types/domain';
 
 class CustomException extends Error {
   public statusCode: Domain.OutputStatuses;

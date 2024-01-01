@@ -4,10 +4,12 @@ import Either from '@/lib/either';
 import { reject } from '@/lib/handler';
 import { decodeToken, isTokenValid } from '@/lib/token';
 import type { Domain } from '@/types/domain';
-import { TokenPayload } from '@/types/token';
+import type { TokenPayload } from '@/types/token';
 
 class AuthenticationMiddleware implements AbstractMiddleware {
-  async intermediateWith(event: Domain.Event): Promise<Domain.Output> {
+  async intermediateWith(
+    event: Domain.Event
+  ): Promise<Domain.Output | Domain.EventContext> {
     const auth = event.headers['Authorization'];
 
     if (!auth || !auth.includes('Bearer ')) {
@@ -30,7 +32,7 @@ class AuthenticationMiddleware implements AbstractMiddleware {
 
     const payload = decodeToken<TokenPayload>(token);
 
-    event.ctx = { user: { userId: payload.userId } };
+    return { user: { userId: payload.userId } };
   }
 }
 

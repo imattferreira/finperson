@@ -2,7 +2,7 @@ import OutputStatus from '@/constants/output-status';
 
 declare namespace Domain {
   interface EventContext {
-    user: {
+    user?: {
       userId: string;
     };
   }
@@ -10,14 +10,19 @@ declare namespace Domain {
   export interface Event {
     body: string | null;
     headers: Record<string, string>;
-    ctx?: EventContext;
+    metadata?: EventContext;
   }
-
-  export type Middleware = (event: Event) => Promise<Domain.Output | void>;
 
   type Handler = (event: Domain.Event) => Promise<Domain.Output>;
 
+  type Middleware = (
+    event: Domain.Event
+  ) => Promise<Domain.Output | Domain.EventContext>;
+
   export type Factory = () => Handler;
+  export type MiddlewareFactory = () => (
+    event: Domain.Event
+  ) => Promise<Domain.Output | Domain.EventContext>;
 
   export type OutputStatuses = (typeof OutputStatus)[keyof typeof OutputStatus];
 

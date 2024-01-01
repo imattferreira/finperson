@@ -2,7 +2,7 @@ import AbstractUseCase from '@/domain/shared/abstract-use-case';
 import InvalidFormatException from '@/exceptions/invalid-format-exception';
 import Either, { Left, Right } from '@/lib/either';
 import { createToken } from '@/lib/token';
-import { TokenPayload } from '@/types/token';
+import type { TokenPayload } from '@/types/token';
 
 import type { AuthenticateReceivedFields } from '../dtos/authenticate-dtos';
 import { comparePassword, encryptPassword } from '../entities/user';
