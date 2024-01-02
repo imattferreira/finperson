@@ -16,6 +16,7 @@ type Output = null;
 
 class CreateUserUseCase implements AbstractUseCase<Input, Output> {
   constructor(private readonly usersRepository: IUsersRepository) {}
+
   async execute({ fields }: Input): Promise<Left | Right<Output>> {
     const userAlreadyExists = await this.usersRepository.findByEmail(
       fields.email

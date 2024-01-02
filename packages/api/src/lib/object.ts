@@ -5,7 +5,8 @@ export const isObject = (obj: unknown): obj is GenericRecord =>
 
 export const stringify = (obj: unknown): string => JSON.stringify(obj);
 
-export const parseJson = <T extends object>(obj: string): T => JSON.parse(obj);
+export const parseJson = <T = Record<string, unknown>>(obj: string): T =>
+  JSON.parse(obj);
 
 export function snake(obj: GenericRecord): GenericRecord {
   const result = {};

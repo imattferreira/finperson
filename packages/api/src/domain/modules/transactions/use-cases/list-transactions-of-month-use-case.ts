@@ -18,6 +18,7 @@ class ListTransactionsOfMonthUseCase implements AbstractUseCase<Input, Output> {
   constructor(
     private readonly transactionsRepository: ITransactionsRepository
   ) {}
+
   async execute({ filters }: Input): Promise<Left | Right<Output>> {
     const transactions = await this.transactionsRepository.findAll({ filters });
 

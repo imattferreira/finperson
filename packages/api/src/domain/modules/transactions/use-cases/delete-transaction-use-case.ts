@@ -27,6 +27,7 @@ class DeleteTransactionUseCase implements AbstractUseCase<Input, Output> {
   constructor(
     private readonly transactionsRepository: ITransactionsRepository
   ) {}
+
   async execute({ fields }: Input): Promise<Left | Right<Output>> {
     if (fields.recurrence) {
       if (
