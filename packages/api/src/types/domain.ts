@@ -10,6 +10,7 @@ export interface Event {
   body: Nullish<string>;
   headers: Record<string, string>;
   metadata: EventContext;
+  query: Record<string, string>;
 }
 
 export type Handler = (event: Event) => Promise<Output>;

@@ -1,3 +1,4 @@
+import makeListTransactionsOfMonthFactory from '@/domain/modules/transactions/factories/make-list-transactions-of-month-factory';
 import middlewareAdapter from '@/infra/adapters/middlewareAdapter';
 import routeAdapter from '@/infra/adapters/routeAdapter';
 import makeAuthenticationMiddlewareFactory from '@/infra/middlewares/factories/make-authentication-middleware-factory';
@@ -8,4 +9,9 @@ const POST = routeAdapter({
   handler: makeCreateTransactionFactory()
 });
 
-export { POST };
+const GET = routeAdapter({
+  middlewares: [middlewareAdapter(makeAuthenticationMiddlewareFactory())],
+  handler: makeListTransactionsOfMonthFactory()
+});
+
+export { GET, POST };

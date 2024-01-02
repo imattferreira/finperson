@@ -1,3 +1,5 @@
+import type { APIGatewayProxyEvent } from 'aws-lambda';
+
 import UnknownException from '@/exceptions/unknown-exception';
 import Either from '@/lib/either';
 import { reject } from '@/lib/handler';
@@ -10,12 +12,13 @@ const routeAdapter = ({
   middlewares?: Domain.Middleware[];
   handler: Domain.Handler;
 }) => {
-  return async (_event: Domain.Event) => {
+  return async (_event: APIGatewayProxyEvent) => {
     try {
       const event: Domain.Event = {
         body: _event.body,
-        headers: _event.headers,
-        metadata: _event.metadata ?? {}
+        headers: _event.headers as Record<string, string>,
+        metadata: {},
+        query: _event.queryStringParameters as Record<string, string>
       };
 
       for (const fn of middlewares) {
@@ -30,11 +33,7 @@ const routeAdapter = ({
         }
       }
 
-      return handler({
-        body: event.body,
-        headers: event.headers,
-        metadata: event.metadata
-      });
+      return handler(event);
     } catch {
       return reject(Either.toLeft(new UnknownException()).unwrap());
     }

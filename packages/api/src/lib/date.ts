@@ -19,3 +19,5 @@ export const diffInMonths = (
   first: number | string,
   second: number | string
 ): number => Math.floor(diff(first, second) / MONTH);
+
+export const getYear = (): number => new Date().getFullYear();
