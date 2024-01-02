@@ -18,6 +18,7 @@ const routeAdapter = ({
         body: _event.body,
         headers: _event.headers as Record<string, string>,
         metadata: {},
+        params: (_event.pathParameters as Record<string, string>) || {},
         query: _event.queryStringParameters as Record<string, string>
       };
 

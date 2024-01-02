@@ -6,6 +6,7 @@ interface ITransactionsRepository {
   findAll(data: {
     filters?: { year: number; month: number };
   }): Promise<Transaction[]>;
+  delete(transactionId: string): Promise<void>;
 }
 
 export default ITransactionsRepository;

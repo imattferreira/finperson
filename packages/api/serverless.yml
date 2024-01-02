@@ -58,9 +58,22 @@ functions:
           path: /users
           method: post
   # transactions module
+  # TODO schema validation
   createTransaction:
     handler: src/infra/routes/transactions/index.POST
     events:
       - httpApi:
           path: /transactions
           method: post
+  listTransactions:
+    handler: src/infra/routes/transactions/index.GET
+    events:
+      - httpApi:
+          path: /transactions
+          method: get
+  deleteTransaction:
+    handler: src/infra/routes/transactions/[transactionId].DELETE
+    events:
+      - httpApi:
+          path: /transactions/{transactionId}
+          method: delete

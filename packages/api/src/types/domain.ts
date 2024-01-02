@@ -10,6 +10,7 @@ export interface Event {
   body: Nullish<string>;
   headers: Record<string, string>;
   metadata: EventContext;
+  params: Record<string, string>;
   query: Record<string, string>;
 }
 

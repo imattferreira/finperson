@@ -25,7 +25,7 @@ class ListTransactionsOfMonthHandler {
       return reject(executed.unwrap());
     }
 
-    return resolve(OutputStatus.CREATED, executed.unwrap());
+    return resolve(OutputStatus.OK, executed.unwrap());
   }
 }
 

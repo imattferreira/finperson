@@ -10,9 +10,14 @@ class TransactionsRepository implements ITransactionsRepository {
   findByName(name: string): Promise<Nullish<Transaction>> {
     throw new Error('Method not implemented.');
   }
+
   findAll(data: {
     filters?: { year: number; month: number } | undefined;
   }): Promise<Transaction[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  delete(transactionId: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }
