@@ -7,18 +7,22 @@ export const AvailableRecurrencesEnum = {
 type AvailableRecurrences = InlineEnum<typeof AvailableRecurrencesEnum>;
 
 interface TransactionRecurrenceFields {
-  each: number;
+  interval: number;
   repeatTimes: number | null;
   recurrence: AvailableRecurrences;
 }
 
 class TransactionRecurrence {
-  #each: number;
+  #interval: number;
   #repeatTimes: number;
   #recurrence: AvailableRecurrences;
 
-  constructor({ each, recurrence, repeatTimes }: TransactionRecurrenceFields) {
-    this.#each = each;
+  constructor({
+    interval,
+    recurrence,
+    repeatTimes
+  }: TransactionRecurrenceFields) {
+    this.#interval = interval;
     this.#recurrence = recurrence;
     this.#repeatTimes = repeatTimes ?? 0;
   }
@@ -27,8 +31,8 @@ class TransactionRecurrence {
     return new TransactionRecurrence(data);
   }
 
-  get each(): number {
-    return this.#each;
+  get interval(): number {
+    return this.#interval;
   }
 
   get repeatTimes(): number {

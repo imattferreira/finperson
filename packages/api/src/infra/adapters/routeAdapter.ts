@@ -26,7 +26,7 @@ const routeAdapter = ({
             return resolved;
           }
 
-          event.metadata = Object.assign(event.metadata || {}, resolved);
+          event.metadata = Object.assign(event.metadata, resolved);
         }
       }
 

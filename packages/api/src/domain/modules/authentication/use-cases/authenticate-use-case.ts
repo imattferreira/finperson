@@ -1,4 +1,4 @@
-import AbstractUseCase from '@/domain/shared/abstract-use-case';
+import AbstractUseCase from '@/core/abstract-use-case';
 import InvalidFormatException from '@/exceptions/invalid-format-exception';
 import Either, { Left, Right } from '@/lib/either';
 import { createToken } from '@/lib/token';
@@ -24,13 +24,7 @@ class AuthenticateUseCase implements AbstractUseCase<Input, Output> {
   async execute({ fields }: Input): Promise<Left | Right<Output>> {
     const user = await this.usersRepository.findByEmail(fields.email);
 
-    if (!user) {
-      return Either.toLeft(
-        new InvalidFormatException('invalid [email] or [password]')
-      );
-    }
-
-    if (!user.password.equals(fields.password)) {
+    if (!user || !user.password.equals(fields.password)) {
       return Either.toLeft(
         new InvalidFormatException('invalid [email] or [password]')
       );

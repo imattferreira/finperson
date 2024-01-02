@@ -15,12 +15,12 @@ export const receivedFieldsSchema = parser.object({
   category: parser.nativeEnum(AvailableCategoriesEnum),
   recurrence: parser
     .object({
-      each: parser.number().min(1).max(31),
+      interval: parser.number().min(1).max(31),
       repeatTimes: parser.number().min(1).nullable(),
       recurrence: parser.nativeEnum(AvailableRecurrencesEnum)
     })
     .nullable(),
-  future: parser.date().nullable(),
+  future: parser.string().datetime().nullable(),
   operation: parser.nativeEnum(AvailableOperationsEnum),
   value: parser.number().min(0.01).max(100_000_000)
 });

@@ -2,7 +2,7 @@ class Timestamp {
   #value: string;
 
   constructor(value = new Date().toISOString()) {
-    this.#value = value ?? new Date().toUTCString();
+    this.#value = value;
   }
 
   static create(value?: string): Timestamp {

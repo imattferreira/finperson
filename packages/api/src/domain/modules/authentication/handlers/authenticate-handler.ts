@@ -1,5 +1,5 @@
 import OutputStatus from '@/constants/output-status';
-import AbstractHandler from '@/domain/shared/abstract-handler';
+import AbstractHandler from '@/core/abstract-handler';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
 import parser from '@/lib/parser';
