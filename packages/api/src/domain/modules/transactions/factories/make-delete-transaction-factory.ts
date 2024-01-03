@@ -1,3 +1,4 @@
+import makeParserServiceFactory from '@/services/factories/make-parser-service-factory';
 import * as Domain from '@/types/domain';
 
 import DeleteTransactionHandler from '../handlers/delete-transaction-handler';
@@ -5,7 +6,8 @@ import makeDeleteTransactionUseCaseFactory from '../use-cases/factories/make-del
 
 const makeDeleteTransactionFactory: Domain.Factory = () => {
   const handler = new DeleteTransactionHandler(
-    makeDeleteTransactionUseCaseFactory()
+    makeDeleteTransactionUseCaseFactory(),
+    makeParserServiceFactory()
   );
 
   return (event) => handler.handleWith(event);

@@ -2,17 +2,23 @@ import OutputStatus from '@/constants/output-status';
 import AbstractHandler from '@/core/abstract-handler';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
-import parser from '@/lib/parser';
+import IParserService from '@/services/interfaces/iparser-service';
 import * as Domain from '@/types/domain';
 
 import { receivedFieldsSchema } from '../dtos/create-user-dtos';
 import CreateUserUseCase from '../use-cases/create-user-use-case';
 
 class CreateUserHandler implements AbstractHandler {
-  constructor(private readonly useCase: CreateUserUseCase) {}
+  constructor(
+    private readonly useCase: CreateUserUseCase,
+    private readonly parserService: IParserService
+  ) {}
 
   async handleWith(event: Domain.Event): Promise<Domain.Output> {
-    const receivedFields = parser.json(event.body, receivedFieldsSchema);
+    const receivedFields = this.parserService.parseJson(
+      event.body,
+      receivedFieldsSchema
+    );
 
     if (Either.isLeft(receivedFields)) {
       return reject(receivedFields.unwrap());

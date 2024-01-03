@@ -1,29 +1,26 @@
 import OutputStatus from '@/constants/output-status';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
-import parser from '@/lib/parser';
+import IParserService from '@/services/interfaces/iparser-service';
 import * as Domain from '@/types/domain';
 
 import DeleteTransactionUseCase from '../use-cases/delete-transaction-use-case';
 
 class DeleteTransactionHandler {
-  constructor(private readonly useCase: DeleteTransactionUseCase) {}
+  constructor(
+    private readonly useCase: DeleteTransactionUseCase,
+    private readonly parserService: IParserService
+  ) {}
 
   async handleWith(event: Domain.Event): Promise<Domain.Output> {
-    const { transactionId } = event.params;
+    const transactionId = this.parserService.uuid(event.params?.transactionId);
 
-    const isTransactionIdValid = parser
-      .string()
-      .uuid()
-      .safeParse(transactionId);
-
-    if (!isTransactionIdValid.success) {
-      // TODO fix
-      return reject(isTransactionIdValid.error);
+    if (Either.isLeft(transactionId)) {
+      return reject(transactionId.unwrap());
     }
 
     const executed = await this.useCase.execute({
-      fields: { transactionId }
+      fields: { transactionId: transactionId.unwrap() }
     });
 
     if (Either.isLeft(executed)) {

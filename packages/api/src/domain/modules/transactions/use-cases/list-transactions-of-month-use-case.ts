@@ -1,12 +1,12 @@
 import AbstractUseCase from '@/core/abstract-use-case';
 import Either, { Left, Right } from '@/lib/either';
 
-import { ListTransactionsOfMonthReceivedFilters } from '../dtos/list-transactions-of-month-dtos';
+import { ReceivedFields } from '../dtos/list-transactions-of-month-dtos';
 import Transaction from '../entities/transaction';
 import ITransactionsRepository from '../repositories/interfaces/itransactions-repository';
 
 interface Input {
-  filters: ListTransactionsOfMonthReceivedFilters;
+  filters: ReceivedFields;
 }
 
 // TODO padronize output returns

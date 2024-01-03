@@ -3,9 +3,7 @@ import { z } from 'zod';
 import { getYear } from '@/lib/date';
 import parser from '@/lib/parser';
 
-export type ListTransactionsOfMonthReceivedFilters = z.infer<
-  typeof receivedFiltersSchema
->;
+export type ReceivedFields = z.infer<typeof receivedFiltersSchema>;
 
 export const receivedFiltersSchema = parser.object({
   year: parser

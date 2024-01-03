@@ -1,17 +1,23 @@
 import OutputStatus from '@/constants/output-status';
 import Either from '@/lib/either';
 import { reject, resolve } from '@/lib/handler';
-import parser from '@/lib/parser';
+import IParserService from '@/services/interfaces/iparser-service';
 import * as Domain from '@/types/domain';
 
 import { receivedFieldsSchema } from '../dtos/create-transaction-dtos';
 import CreateTransactionUseCase from '../use-cases/create-transaction-use-case';
 
 class CreateTransactionHandler {
-  constructor(private readonly useCase: CreateTransactionUseCase) {}
+  constructor(
+    private readonly useCase: CreateTransactionUseCase,
+    private readonly parserService: IParserService
+  ) {}
 
   async handleWith(event: Domain.Event): Promise<Domain.Output> {
-    const receivedFields = parser.json(event.body, receivedFieldsSchema);
+    const receivedFields = this.parserService.parseJson(
+      event.body,
+      receivedFieldsSchema
+    );
 
     if (Either.isLeft(receivedFields)) {
       return reject(receivedFields.unwrap());
