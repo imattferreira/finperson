@@ -2,6 +2,8 @@ node_modules/
 
 # build apps stuff
 .esbuild
+.vinxi
+.output
 
 # IDEs and editors
 /.idea
