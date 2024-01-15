@@ -2,12 +2,14 @@
 import type { JSX } from "solid-js/jsx-runtime";
 import type {
   ChangeEventSyntheticHandler,
+  ErrorTypes,
   Normalizer,
   Validator,
 } from "../types";
-import { For } from "solid-js";
-import InputError from "./input-error";
-import { SubmitElementEvent } from "~/@types/events";
+import { For, Suspense, lazy } from "solid-js";
+import type { SubmitElementEvent } from "~/@types/events";
+
+const InputError = lazy(() => import("./input-error"));
 
 type InputElement = Omit<
   JSX.InputHTMLAttributes<HTMLInputElement>,
@@ -16,7 +18,8 @@ type InputElement = Omit<
 
 type InputProps = InputElement & {
   name: string;
-  errors?: string[] | null;
+  errors?: ErrorTypes[] | null;
+  label: string;
   "use:normalizer"?: Normalizer;
   "use:validate"?: Validator<string>;
   "on:change": ChangeEventSyntheticHandler;
@@ -43,9 +46,11 @@ const Input = (props: InputProps) => {
 
   return (
     <div>
+      <label for={props.name}>{props.label}</label>
       <input
+        id={props.name}
         ref={inputRef}
-        class="bg-zinc-700 p-2 rounded-sm w-full"
+        class="mt-1 bg-zinc-700 p-2 rounded-sm w-full outline-none focus:border-emerald-600 border-zinc-700 border transition-all"
         {...props}
         onChange={props["on:change"](props.name, props["use:normalizer"])}
         onSubmit={onSubmit}
@@ -53,7 +58,11 @@ const Input = (props: InputProps) => {
       {props?.errors && (
         <div class="mb-1">
           <For each={props.errors}>
-            {(error) => <InputError message={error} />}
+            {(error) => (
+              <Suspense>
+                <InputError type={error} />
+              </Suspense>
+            )}
           </For>
         </div>
       )}

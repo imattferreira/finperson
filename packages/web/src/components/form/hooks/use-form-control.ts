@@ -9,15 +9,11 @@ import type {
 } from "../types";
 import { errorsInitializer } from "../utils";
 
-type FormControlInput<T> = {
-  fields: T;
-};
-
 type ValidatorIntermediary<T extends FieldTypes> = (value: T) => string[];
 
 type Submitter<T> = (fields: T) => Promise<void> | void;
 
-function useFormControl<T extends FormFields>({ fields }: FormControlInput<T>) {
+function useFormControl<T extends FormFields>(fields: T) {
   const [stored, setStored] = createStore<T>(fields);
   const [errors, setErrors] = createStore<FormError<T>>(
     errorsInitializer(fields)
@@ -30,6 +26,11 @@ function useFormControl<T extends FormFields>({ fields }: FormControlInput<T>) {
       setStored({ ...stored, [name]: normalizer ? normalizer(value) : value });
     };
 
+  const cleanup = () => {
+    setStored(fields);
+    setErrors(errorsInitializer(fields));
+  };
+
   const validator =
     <T extends FieldTypes>(fn: ValidatorIntermediary<T>): Validator<T> =>
     (data: T) => {
@@ -40,21 +41,14 @@ function useFormControl<T extends FormFields>({ fields }: FormControlInput<T>) {
 
   const onSubmit = (submitter: Submitter<T>) => () => submitter(stored);
 
-  const onInvalid: InvalidEventHandler = (event) => {
-    // TODO verify if popup appear yet (noValidate on form??)
-    event.stopPropagation();
+  const onInvalid: InvalidEventHandler = (messages) => {
+    const result: FormError<T> = {} as FormError<T>;
 
-    const inputs = event.target.querySelectorAll("input");
-    const errors: FormError<T> = {} as FormError<T>;
-
-    inputs.forEach((input) => {
-      if (input.validationMessage) {
-        // TODO before parse, validate if is native validation
-        errors[input.name as keyof T] = JSON.parse(input.validationMessage);
-      }
+    messages.forEach(({ name, type }) => {
+      result[name as keyof T] = [type];
     });
 
-    setErrors(errors);
+    setErrors(result);
   };
 
   return {
@@ -62,6 +56,7 @@ function useFormControl<T extends FormFields>({ fields }: FormControlInput<T>) {
     errors,
     fields: stored,
     changer,
+    cleanup,
     validator,
     onSubmit,
   };

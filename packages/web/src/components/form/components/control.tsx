@@ -1,6 +1,7 @@
 import type { JSX } from "solid-js/jsx-runtime";
 import type { InvalidEventHandler } from "../types";
-import { SubmitElementEvent } from "~/@types/events";
+import type { SubmitElementEvent } from "~/@types/events";
+import { getErrorType } from "../utils";
 
 type ControlProps = {
   children: JSX.Element[];
@@ -19,6 +20,22 @@ const Control = (props: ControlProps) => {
     const isValid = formRef!.checkValidity();
 
     if (!isValid) {
+      const messages = [];
+
+      const inputs = formRef!.querySelectorAll("input");
+
+      for (const input of inputs) {
+        if (!input.validationMessage) {
+          return;
+        }
+
+        messages.push({
+          name: input.name,
+          type: getErrorType(input.validity),
+        });
+      }
+
+      props.control.onInvalid(messages);
       return;
     }
 
@@ -30,7 +47,7 @@ const Control = (props: ControlProps) => {
       ref={formRef}
       class="flex flex-col space-y-4 w-full"
       onSubmit={onSubmit}
-      oninvalid={props.control.onInvalid}
+      noValidate
     >
       {props.children}
     </form>

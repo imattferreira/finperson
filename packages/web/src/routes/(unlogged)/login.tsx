@@ -7,36 +7,18 @@ type FormFields = {
 };
 
 function Login() {
-  const { control, errors, fields, changer, validator, onSubmit } =
+  const { control, errors, fields, changer, cleanup, onSubmit } =
     useFormControl<FormFields>({
-      fields: { email: "", password: "" },
+      email: "",
+      password: "",
     });
-
-  // TODO implement
-  const emailValidator = validator<string>((input) => {
-    let errors = [];
-
-    if (!input) {
-      errors.push("asdasdsada");
-    }
-
-    return errors;
-  });
-
-  // TODO implement
-  const passwordValidator = validator<string>((input) => {
-    const errors = [];
-
-    if (!input) {
-      errors.push("sdadasda");
-    }
-
-    return errors;
-  });
 
   // run on server?
   const onSubmitHandler = onSubmit((fields) => {
+    // cleanup fields
     console.log(fields);
+
+    cleanup();
   });
 
   return (
@@ -52,8 +34,8 @@ function Login() {
           placeholder="john@email.com"
           on:change={changer}
           value={fields.email}
+          label="E-mail"
           errors={errors.email}
-          use:validate={emailValidator}
           required
         />
         <Form.Input
@@ -62,10 +44,10 @@ function Login() {
           placeholder="********"
           minLength={8}
           maxLength={32}
+          label="Password"
           on:change={changer}
           value={fields.password}
           errors={errors.password}
-          use:validate={passwordValidator}
           required
         />
         <Button.Container type="primary" htmlType="submit">

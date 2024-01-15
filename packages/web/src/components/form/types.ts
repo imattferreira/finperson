@@ -1,5 +1,3 @@
-// TODO organize better
-import type { JSX } from "solid-js/jsx-runtime";
 import { ChangeElementEvent } from "~/@types/events";
 
 export type Validator<T extends FieldTypes> = (value: T) => string[] | void;
@@ -11,10 +9,24 @@ export type FieldTypes = string | number;
 export type FormFields = Record<string, FieldTypes>;
 
 export type FormError<T> = {
-  [k in keyof T]: string[] | null;
+  [k in keyof T]: ErrorTypes[] | null;
 };
 
-export type InvalidEventHandler = JSX.EventHandlerUnion<HTMLFormElement, Event>;
+export type ErrorTypes =
+  | "bad_input"
+  | "custom"
+  | "pattern_mismatch"
+  | "range_overflow"
+  | "range_underflow"
+  | "step_mismatch"
+  | "too_long"
+  | "too_short"
+  | "type_mismatch"
+  | "value_missing";
+
+export type InvalidEventHandler = (
+  messages: { name: string; type: ErrorTypes }[]
+) => void;
 
 export type ChangeEventSyntheticHandler = (
   name: string,
