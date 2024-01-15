@@ -1,7 +1,7 @@
-import Container from "./container";
+import Container from './container';
 
 const Button = {
-  Container,
+  Container
 };
 
 export default Button;

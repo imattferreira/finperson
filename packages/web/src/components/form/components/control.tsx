@@ -1,11 +1,13 @@
-import type { JSX } from "solid-js/jsx-runtime";
-import type { InvalidEventHandler } from "../types";
-import type { SubmitElementEvent } from "~/@types/events";
-import { getErrorType } from "../utils";
+import type { JSX } from 'solid-js/jsx-runtime';
+
+import type { SubmitElementEvent } from '~/@types/events';
+
+import type { InvalidEventHandler } from '../types';
+import { getErrorType } from '../utils';
 
 type ControlProps = {
   children: JSX.Element[];
-  "on:submit": (event: SubmitElementEvent<HTMLFormElement>) => void;
+  'on:submit': (event: SubmitElementEvent<HTMLFormElement>) => void;
   control: {
     onInvalid: InvalidEventHandler;
   };
@@ -22,7 +24,7 @@ const Control = (props: ControlProps) => {
     if (!isValid) {
       const messages = [];
 
-      const inputs = formRef!.querySelectorAll("input");
+      const inputs = formRef!.querySelectorAll('input');
 
       for (const input of inputs) {
         if (!input.validationMessage) {
@@ -31,7 +33,7 @@ const Control = (props: ControlProps) => {
 
         messages.push({
           name: input.name,
-          type: getErrorType(input.validity),
+          type: getErrorType(input.validity)
         });
       }
 
@@ -39,7 +41,7 @@ const Control = (props: ControlProps) => {
       return;
     }
 
-    props["on:submit"](event);
+    props['on:submit'](event);
   };
 
   return (

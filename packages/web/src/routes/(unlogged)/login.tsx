@@ -1,5 +1,5 @@
-import { Form, useFormControl } from "~/components/form";
-import Button from "~/components/button";
+import { Form, useFormControl } from '~/components/form';
+import Button from '~/components/button';
 
 type FormFields = {
   email: string;
@@ -9,8 +9,8 @@ type FormFields = {
 function Login() {
   const { control, errors, fields, changer, cleanup, onSubmit } =
     useFormControl<FormFields>({
-      email: "",
-      password: "",
+      email: '',
+      password: ''
     });
 
   // run on server?

@@ -1,13 +1,14 @@
-import { createStore } from "solid-js/store";
+import { createStore } from 'solid-js/store';
+
 import type {
   ChangeEventSyntheticHandler,
   FieldTypes,
   FormError,
   FormFields,
   InvalidEventHandler,
-  Validator,
-} from "../types";
-import { errorsInitializer } from "../utils";
+  Validator
+} from '../types';
+import { errorsInitializer } from '../utils';
 
 type ValidatorIntermediary<T extends FieldTypes> = (value: T) => string[];
 
@@ -58,7 +59,7 @@ function useFormControl<T extends FormFields>(fields: T) {
     changer,
     cleanup,
     validator,
-    onSubmit,
+    onSubmit
   };
 }
 

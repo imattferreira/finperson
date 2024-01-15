@@ -1,4 +1,4 @@
-import { ErrorTypes } from "../types";
+import { ErrorTypes } from '../types';
 
 // TODO add icon
 type ErrorProps = {
@@ -7,16 +7,16 @@ type ErrorProps = {
 
 // TODO create generic messages
 const MESSAGES_BY_TYPE: Record<ErrorTypes, string> = {
-  bad_input: "",
-  custom: "",
-  pattern_mismatch: "",
-  range_overflow: "",
-  range_underflow: "",
-  step_mismatch: "",
-  too_long: "",
-  too_short: "",
-  type_mismatch: "",
-  value_missing: "Is necessary fill this field.",
+  bad_input: '',
+  custom: '',
+  pattern_mismatch: '',
+  range_overflow: '',
+  range_underflow: '',
+  step_mismatch: '',
+  too_long: '',
+  too_short: '',
+  type_mismatch: '',
+  value_missing: 'Is necessary fill this field.'
 };
 
 const InputError = (props: ErrorProps) => (
